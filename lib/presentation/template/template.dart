@@ -10,8 +10,8 @@ export 'themes/theme_data.dart';
 export 'themes/theme_text_style.dart';
 
 // common
-export '../../utils/common/constant_text.dart';
 export '../../utils/common/constants.dart';
+export '../../utils/common/constant_text.dart';
 export '../../utils/common/makit_icons.dart';
 export '../../utils/common/validators.dart';
 
@@ -23,10 +23,10 @@ export '../../utils/localization/languages/russian_locale.dart';
 export '../../data/navigation/routes.dart';
 
 // widgets
+export '../widgets/spaced_column/spaced_column.dart';
+export '../widgets/spaced_row/spaced_row.dart';
 export '../widgets/custom_icon/custom_icon.dart';
 export '../widgets/custom_text/custom_text.dart';
-export '../widgets/spaced_row/spaced_row.dart';
-export '../widgets/spaced_column/spaced_column.dart';
 
 // pages
 export '../pages/authorization.dart';

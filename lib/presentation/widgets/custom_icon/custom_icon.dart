@@ -8,8 +8,8 @@ class CustomIcon extends StatelessWidget {
   const CustomIcon({
     super.key,
     required this.icon,
-    this.color = ThemeColors.white,
-    this.size = 50,
+    this.color = ThemeColors.grey3,
+    this.size = 60,
   });
 
   @override
