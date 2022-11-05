@@ -10,6 +10,7 @@ class CustomInputField extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextFormField(
+        style: ThemeTextStyle.s16.copyWith(color: ThemeColors.black),
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: ThemeTextStyle.s16.copyWith(color: ThemeColors.grey2),
