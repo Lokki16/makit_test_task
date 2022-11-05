@@ -27,6 +27,7 @@ export '../widgets/spaced_column/spaced_column.dart';
 export '../widgets/spaced_row/spaced_row.dart';
 export '../widgets/custom_icon/custom_icon.dart';
 export '../widgets/custom_text/custom_text.dart';
+export '../widgets/custom_imputfield/custom_inputfield.dart';
 
 // pages
 export '../pages/authorization.dart';
