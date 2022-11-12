@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:makit_test_task/data/models/users_model_list.dart';
+import 'package:makit_test_task/data/models/user_models/users_model_list.dart';
 
 class UsersProvider {
   Future<UsersModelList> getCharactersList() async {

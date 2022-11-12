@@ -1,6 +1,8 @@
 // packages
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';
+export 'package:formz/formz.dart';
+export 'package:equatable/equatable.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +15,7 @@ export 'themes/theme_colors.dart';
 export '../../utils/common/constants.dart';
 export '../../utils/common/constant_text.dart';
 export '../../utils/common/makit_icons.dart';
-export '../../utils/common/validators.dart';
+export '../../utils/common/authorization_repository.dart';
 
 // localization
 export '../../utils/localization/get_localization.dart';
@@ -21,6 +23,10 @@ export '../../utils/localization/languages/russian_locale.dart';
 
 // navigation
 export '../../data/navigation/routes.dart';
+
+// models
+export '../../data/models/authorization_models/login_model.dart';
+export '../../data/models/authorization_models/password_model.dart';
 
 // widgets
 export '../widgets/spaced_column/spaced_column.dart';

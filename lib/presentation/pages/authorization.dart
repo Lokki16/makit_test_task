@@ -1,7 +1,15 @@
 import 'package:makit_test_task/presentation/template/template.dart';
 
-class Authorization extends StatelessWidget {
+class Authorization extends StatefulWidget {
   const Authorization({Key? key}) : super(key: key);
+
+  @override
+  State<Authorization> createState() => _AuthorizationState();
+}
+
+class _AuthorizationState extends State<Authorization> {
+  final email = TextEditingController();
+  final password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +48,12 @@ class Authorization extends StatelessWidget {
               SizedBox(height: 32.h),
               const CustomInputField(labelText: ConstantText.password),
               SizedBox(height: 56.h),
-              CustomButton(text: ConstantText.comeIn, onPressed: () {}),
+              CustomButton(
+                text: ConstantText.comeIn,
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(AppRoutes.routeToUsers),
+                isActive: true,
+              ),
             ],
           ),
         ],

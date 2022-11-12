@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:makit_test_task/data/models/user_model.dart';
+import 'package:makit_test_task/data/models/user_models/user_model.dart';
 
 part 'users_model_list.g.dart';
 
