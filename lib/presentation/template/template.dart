@@ -28,6 +28,9 @@ export '../../data/navigation/routes.dart';
 export '../../data/models/authorization_models/login_model.dart';
 export '../../data/models/authorization_models/password_model.dart';
 
+// bloc
+export '../../bloc/authorization_bloc/authorization_bloc.dart';
+
 // widgets
 export '../widgets/spaced_column/spaced_column.dart';
 export '../widgets/spaced_row/spaced_row.dart';

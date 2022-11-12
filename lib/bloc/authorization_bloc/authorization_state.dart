@@ -1,28 +1,28 @@
 part of 'authorization_bloc.dart';
 
 class AuthorizationState extends Equatable {
-  final FormzStatus status;
   final Login login;
   final Password password;
+  final FormzStatus status;
 
   const AuthorizationState({
-    this.status = FormzStatus.pure,
     this.login = const Login.pure(),
     this.password = const Password.pure(),
+    this.status = FormzStatus.pure,
   });
 
   AuthorizationState copyWith({
-    FormzStatus? status,
     Login? login,
     Password? password,
+    FormzStatus? status,
   }) {
     return AuthorizationState(
-      status: status ?? this.status,
       login: login ?? this.login,
       password: password ?? this.password,
+      status: status ?? this.status,
     );
   }
 
   @override
-  List<Object> get props => [status, login, password];
+  List<Object> get props => [login, password, status];
 }

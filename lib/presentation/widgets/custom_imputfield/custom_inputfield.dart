@@ -2,8 +2,13 @@ import 'package:makit_test_task/presentation/template/template.dart';
 
 class CustomInputField extends StatelessWidget {
   final String labelText;
+  final void Function(String) onChanged;
 
-  const CustomInputField({super.key, required this.labelText});
+  const CustomInputField({
+    super.key,
+    required this.labelText,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +16,7 @@ class CustomInputField extends StatelessWidget {
       width: double.infinity,
       height: 51.h,
       child: TextFormField(
+        onChanged: onChanged,
         style: ThemeTextStyle.s16.copyWith(color: ThemeColors.black),
         decoration: InputDecoration(
           labelText: labelText.tr,

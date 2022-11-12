@@ -1,15 +1,8 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makit_test_task/presentation/template/template.dart';
 
-class Authorization extends StatefulWidget {
+class Authorization extends StatelessWidget {
   const Authorization({Key? key}) : super(key: key);
-
-  @override
-  State<Authorization> createState() => _AuthorizationState();
-}
-
-class _AuthorizationState extends State<Authorization> {
-  final email = TextEditingController();
-  final password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +12,7 @@ class _AuthorizationState extends State<Authorization> {
           Align(
             alignment: Alignment.topCenter,
             child: ClipPath(
-              clipper: HeaderClipper(),
+              clipper: _HeaderClipper(),
               child: Container(
                 height: 378.h,
                 decoration: const BoxDecoration(
@@ -42,27 +35,113 @@ class _AuthorizationState extends State<Authorization> {
               ),
             ),
           ),
-          CustomDialog(
-            children: [
-              const CustomInputField(labelText: ConstantText.email),
-              SizedBox(height: 32.h),
-              const CustomInputField(labelText: ConstantText.password),
-              SizedBox(height: 56.h),
-              CustomButton(
-                text: ConstantText.comeIn,
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(AppRoutes.routeToUsers),
-                isActive: true,
-              ),
-            ],
-          ),
+          const _Form(),
         ],
       ),
     );
   }
 }
 
-class HeaderClipper extends CustomClipper<Path> {
+class _Form extends StatelessWidget {
+  const _Form({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AuthorizationBloc(
+        authenticationRepository:
+            RepositoryProvider.of<AuthorizationRepository>(context),
+      ),
+      child: BlocListener<AuthorizationBloc, AuthorizationState>(
+        listener: (context, state) {
+          if (state.status.isSubmissionFailure) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(content: Text('Authentication Failure')),
+              );
+          }
+        },
+        child: CustomDialog(
+          children: [
+            const _LoginInput(),
+            SizedBox(height: 32.h),
+            const _PasswordInput(),
+            SizedBox(height: 56.h),
+            const _LoginButton(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LoginInput extends StatelessWidget {
+  const _LoginInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthorizationBloc, AuthorizationState>(
+      buildWhen: (previous, current) => previous.login != current.login,
+      builder: (context, state) {
+        return CustomInputField(
+          labelText: ConstantText.email,
+          onChanged: (login) => context
+              .read<AuthorizationBloc>()
+              .add(AuthorizationLoginChanged(login)),
+        );
+      },
+    );
+  }
+}
+
+class _PasswordInput extends StatelessWidget {
+  const _PasswordInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthorizationBloc, AuthorizationState>(
+      buildWhen: (previous, current) => previous.password != current.password,
+      builder: (context, state) {
+        return CustomInputField(
+          labelText: ConstantText.password,
+          onChanged: (password) => context
+              .read<AuthorizationBloc>()
+              .add(AuthorizationPasswordChanged(password)),
+        );
+      },
+    );
+  }
+}
+
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthorizationBloc, AuthorizationState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        return state.status.isSubmissionInProgress
+            ? const CircularProgressIndicator()
+            : CustomButton(
+                text: ConstantText.comeIn,
+                onPressed: state.status.isValidated
+                    ? () {
+                        context
+                            .read<AuthorizationBloc>()
+                            .add(const AuthorizationSubmitted());
+                      }
+                    : null,
+              );
+      },
+    );
+  }
+}
+
+class _HeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
@@ -74,5 +153,5 @@ class HeaderClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(HeaderClipper oldClipper) => false;
+  bool shouldReclip(_HeaderClipper oldClipper) => false;
 }
